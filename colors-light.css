@@ -39,4 +39,11 @@ body {
 
 .task {
     color: black;
+    background-color: #FEFBF1;
+}
+
+.assignee {
+    color: #fff;
+    border-color: #333;
+    background-color: #aaa;
 }
