@@ -1,0 +1,80 @@
+body {
+	font-family: Helvetica, Arial, sans-serif;
+    font-size: 12pt;
+}
+
+.taskboard {
+    width: 100%;
+}
+
+.box {
+    width: 20%;
+    vertical-align: top;
+}
+
+.project_description {
+}
+
+.backlog {
+}
+
+.in_progress {
+}
+
+.assigned {
+}
+
+.task_actions {
+    float: right;
+    margin: 3px;
+}
+
+img.task_assign_action {
+    width: 26px;
+    height: 16px;
+    cursor: hand;
+}
+
+img.task_back_action, img.task_forward_action {
+    width: 26px;
+    height: 16px;
+    cursor: hand;
+}
+
+div.task.backlog img.task_forward_action,
+div.task.backlog img.task_back_action {
+    display: none;
+}
+
+div.task.done img.task_forward_action {
+    display: none;
+}
+
+.done {
+}
+
+.project_separator {
+    border-top-width: 3px;
+    border-top-style: dashed;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.project_actions {
+    float: right;
+    border-width: 1px;
+    border-style: solid;
+    padding: 2px;
+    font-size: 0.8em;
+}
+
+.task {
+    float: left;
+    border-width: 1px solid;
+    border-style: solid;
+    margin: 2px;
+    padding: 2px;
+    max-width: 20em;
+    border-radius: 4px;
+}

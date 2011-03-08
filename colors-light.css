@@ -1,0 +1,42 @@
+body {
+    background-color: white;
+}
+
+.box {
+    color: black;
+}
+
+.project_description {
+    color: black;
+    background-color: white;
+}
+
+.backlog {
+	background-color: #1240AB;
+}
+
+.in_progress {
+	background-color: #FFAA00;
+}
+
+.assigned {
+	background-color: #FF5600;
+}
+
+.done {
+	background-color: #00AA72;
+}
+
+.project_separator {
+    border-top-color: black;
+}
+
+.project_actions {
+    border-color: black;
+    background-color: white;
+    color: black;
+}
+
+.task {
+    color: black;
+}
