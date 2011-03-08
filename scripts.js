@@ -7,7 +7,7 @@ var task_states = {
 
 function change_state(button, forward) {
     var project = button.closest(".project_row"), id = project.attr("id");
-    var task = button.parent().parent().parent();
+    var task = button.closest(".task");
     var newState, state;
     
     for (state in task_states) {
@@ -44,9 +44,9 @@ $(document).ready(function() {
         buttons: {
             "Ok": function() {
                 var dialog = $(this);
-                var data = dialog.data("source");
+                var source = dialog.data("source");
                 dialog.dialog("close");
-                change_state(data, true);
+                if (source.closest(".task").hasClass("backlog")) change_state(source, true);
             }
         }
     });
