@@ -12,19 +12,19 @@ body {
 }
 
 .backlog {
-	background-color: #1240AB;
+	background-color: white;
 }
 
 .in_progress {
-	background-color: #FFAA00;
+	border-color: #FFAA00;
 }
 
 .assigned {
-	background-color: #FF5600;
+	border-color: #FF5600;
 }
 
 .done {
-	background-color: #00AA72;
+	border-color: #00AA72;
 }
 
 .project_separator {

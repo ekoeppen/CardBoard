@@ -7,7 +7,7 @@ var task_states = {
 
 function change_state(button, forward) {
     var project = button.closest(".project_row"), id = project.attr("id");
-    var task = button.parent().parent();
+    var task = button.parent().parent().parent();
     var newState, state;
     
     for (state in task_states) {
@@ -31,14 +31,23 @@ $(document).ready(function() {
         change_state($(this), false);
     });
     
-    $("img.task_assign_action").click(function(event) {
-        $("#assign_dialog").dialog('open');
+    $(".assignee").click(function(event) {
+        var dialog = $("#assign_dialog");
+        $("#assign_dialog_assignee").text("Assignee");
+        dialog.data("source", $(this));
+        dialog.dialog('open');
     });
     
     $("#assign_dialog").dialog({
+        title: "Assign",
         autoOpen: false,
         buttons: {
-            "Ok": function() { $(this).dialog("close"); }
+            "Ok": function() {
+                var dialog = $(this);
+                var data = dialog.data("source");
+                dialog.dialog("close");
+                change_state(data, true);
+            }
         }
     });
 });
