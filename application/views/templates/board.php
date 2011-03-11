@@ -1,14 +1,3 @@
-<html>
-<head>
-<link type="text/css" href="layout.css" rel="stylesheet" />
-<link type="text/css" href="colors-light.css" rel="stylesheet" />
-<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css" rel="stylesheet" media="all" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js" type="text/javascript"></script>
-<script src="scripts.js" type="text/javascript"></script>
-<title>CardBoard</title>
-</head>
-<body>
 <div id="assign_dialog" style="display:none">
 	Assign to: <span id="assign_dialog_assignee">...</span>
 </div>
@@ -23,7 +12,7 @@
            <div class="task backlog">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 				<div class="task_decorator">
 					<span class="assignee">...</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
 				</div>
 			</div>
         </td>
@@ -31,27 +20,27 @@
             <div class="task assigned">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 				<div class="task_decorator">
 					<span class="assignee">Bob</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
 				</div>
 			</div>
             <div class="task assigned">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<div class="task_actions">
 				<div class="task_decorator">
 					<span class="assignee">Bob</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
-				</div>
-			</div>
-			</div>
-            <div class="task assigned">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<div class="task_actions">
-				<div class="task_decorator">
-					<span class="assignee">Bob</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
 				</div>
 			</div>
 			</div>
             <div class="task assigned">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<div class="task_actions">
 				<div class="task_decorator">
 					<span class="assignee">Bob</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
+				</div>
+			</div>
+			</div>
+            <div class="task assigned">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<div class="task_actions">
+				<div class="task_decorator">
+					<span class="assignee">Bob</span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
 				</div>
 			</div>
 			</div>
@@ -60,7 +49,7 @@
 			<div class="task in_progress">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<div class="task_actions">
 				<div class="task_decorator">
 					<span class="assignee">Bob</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
 				</div>
 			</div>
 			</div></td>
@@ -77,19 +66,18 @@
             <div class="task done">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<div class="task_actions">
 				<div class="task_decorator">
 					<span class="assignee">Bob</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
 				</div>
 			</div>
 			</div>
             <div class="task done">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor<div class="task_actions">
 				<div class="task_decorator">
 					<span class="assignee">Bob</span>
-					<span class="task_actions"><img class="task_back_action" src="back.svg"/><img class="task_forward_action" src="forward.svg"/></span>
+					<span class="task_actions"><img class="task_back_action" src="media/images/back.svg"/><img class="task_forward_action" src="media/images/forward.svg"/></span>
 				</div>
 			</div>
 			</div>
         </td>
     </tr>
 </table>
-</body>
-</html>
+
