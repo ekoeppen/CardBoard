@@ -4,7 +4,8 @@ class Controller_Welcome extends Controller {
 
 	public function action_index()
 	{
-		$this->response->body('hello, world!');
+		$project = ORM::factory('project', 1);
+		echo $project->name . ' ' . $project->description;
 	}
 
 } // End Welcome
