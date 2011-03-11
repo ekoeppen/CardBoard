@@ -6,6 +6,7 @@ class Controller_Board extends Controller_DefaultTemplate {
 	{
 		$param =  array();
 		$params['projects'] = ORM::factory("project")->find_all();
+		$params['tasks'] = ORM::factory("task")->find_all();
 		$this->template->content = View::factory('templates/board', $params);
 	}
 
