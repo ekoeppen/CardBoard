@@ -6,7 +6,7 @@
 	url = http://github.com/kohana/codebench.git
 [submodule "modules/database"]
 	path = modules/database
-	url = http://github.com/kohana/database.git
+	url = git@github.com:ekoeppen/database.git
 [submodule "modules/image"]
 	path = modules/image
 	url = http://github.com/kohana/image.git
