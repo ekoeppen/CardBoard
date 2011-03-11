@@ -1,3 +1,3 @@
-# Kohana PHP Framework, version 3.1 (release)
+# CardBoard
 
-This is the current release version of [Kohana](http://kohanaframework.org/).
+A simple task board
