@@ -36,6 +36,7 @@ body {
     display: block-inline;
     vertical-align: top;
     border-radius: 4px;
+    -moz-border-radius: 4px;
     border-width: 1px;
     border-style: solid;
     padding: 2px 4px 2px 4px;
@@ -84,4 +85,5 @@ div.task.done img.task_forward_action {
     padding: 2px;
     max-width: 20em;
     border-radius: 6px;
+    -moz-border-radius: 6px;
 }
