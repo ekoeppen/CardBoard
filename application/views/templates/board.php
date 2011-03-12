@@ -18,7 +18,7 @@ foreach ($projects as $p) {
 		echo "<td class='box' id='project-$p->id-" . $states[$state] . "'>";
 		foreach ($tasks as $t) {
 			if ($t->project_id == $p->id && $t->status == $state) {
-				echo "<div class='task " . $states[$state] . "'>$t->description" .
+				echo "<div id='task-$t->id' class='task " . $states[$state] . "'>$t->description" .
 					"<div class='task_decorator'>" .
 					"<span class='assignee'>...</span>" .
 					"<span class='task_actions'><img class='task_back_action' src='media/images/back.svg'/><img class='task_forward_action' src='media/images/forward.svg'/></span>" .

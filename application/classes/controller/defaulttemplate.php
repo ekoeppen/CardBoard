@@ -27,7 +27,7 @@ class Controller_DefaultTemplate extends Controller_Template
 												//'media/css/print.css' => 'print',
 												'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css' => 'screen',
 												//'media/css/fonts.css' => 'screen',
-												'media/css/colors-dark.css' => 'screen',
+												'media/css/colors-light.css' => 'screen',
 												'media/css/layout.css' => 'screen'
 												);
 			$this->template->scripts          = array(

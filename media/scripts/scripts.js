@@ -6,8 +6,8 @@ var task_states = {
 };
 
 function change_state(button, forward) {
-    var project = button.closest(".project_row"), id = project.attr("id");
-    var task = button.closest(".task");
+    var project = button.closest(".project_row"), pid = project.attr("id");
+    var task = button.closest(".task"), tid = task.attr("id").substr(5);
     var newState, state;
     
     for (state in task_states) {
@@ -17,8 +17,9 @@ function change_state(button, forward) {
     newState = forward ? task_states[state].next : task_states[state].previous;
     if (newState) {
         task.removeClass(state);
-        $("#" + id + "-" + newState).append(task);
+        $("#" + pid + "-" + newState).append(task);
         task.addClass(newState);
+        $.get("/CardBoard/board/move_task/" + tid + "/" + newState);
     }
 }
 
