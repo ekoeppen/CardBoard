@@ -5,6 +5,7 @@ body {
 
 .box {
     color: white;
+    border-right-color: black;
 }
 
 .project {

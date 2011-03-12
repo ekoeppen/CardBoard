@@ -15,6 +15,11 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$param =  array();
 		$params['projects'] = ORM::factory("project")->find_all();
 		$params['tasks'] = ORM::factory("task")->find_all();
+		$assignees = ORM::factory("person")->find_all();
+		$params['assignees'] = array();
+		foreach ($assignees as $a) {
+			$params['assignees'][$a->id] = $a;
+		}
 		$this->template->content = View::factory('templates/board', $params);
 	}
 	
@@ -22,6 +27,14 @@ class Controller_Board extends Controller_DefaultTemplate {
 	{
 		$task = ORM::factory("task", $id);
 		$task->status = Controller_Board::$states[$state];
+		$task->save();
+		echo 1;
+	}
+	
+	public function action_set_assignee($id, $assignee)
+	{
+		$task = ORM::factory("task", $id);
+		$task->assignee_id = $assignee;
 		$task->save();
 		echo 1;
 	}

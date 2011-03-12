@@ -10,6 +10,12 @@ body {
 .box {
     width: 20%;
     vertical-align: top;
+    border-right-width: 2px;
+    border-right-style: dotted;
+}
+
+.last_box {
+    border-right: none;
 }
 
 .project {
@@ -44,14 +50,10 @@ body {
 }
 
 img.task_back_action, img.task_forward_action {
-/*    width: 26px;
-    height: 16px;*/
     cursor: hand;
 }
 
 img.new_task_action {
-/*    width: 16px;
-    height: 16px;*/
     cursor: hand;
 }
 

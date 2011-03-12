@@ -34,11 +34,16 @@ $(document).ready(function() {
     
     $(".assignee").click(function(event) {
         var dialog = $("#assign_dialog");
-        $("#assign_dialog_assignee").text("Assignee");
         dialog.data("source", $(this));
         dialog.dialog('open');
     });
-    
+
+    $("img.new_task_action").click(function(event) {
+        var dialog = $("#new_task_dialog");
+        dialog.data("source", $(this));
+        dialog.dialog('open');
+    });
+
     $("#assign_dialog").dialog({
         title: "Assign",
         autoOpen: false,
@@ -46,8 +51,32 @@ $(document).ready(function() {
             "Ok": function() {
                 var dialog = $(this);
                 var source = dialog.data("source");
+                var task = source.closest(".task");
+                var tid = task.attr("id").substr(5);
+                
+                $.get("/CardBoard/board/set_assignee/" + tid + "/" + $("#assign_dialog_assignee").attr("value"));
+                task.find(".assignee").text($("#assign_dialog_assignee option:selected").text());
                 dialog.dialog("close");
-                if (source.closest(".task").hasClass("backlog")) change_state(source, true);
+                if (task.hasClass("backlog")) {
+                    change_state(source, true);
+                }
+            }
+        }
+    });
+
+    $("#new_task_dialog").dialog({
+        title: "New Task",
+        autoOpen: false,
+        buttons: {
+            "Ok": function() {
+                var dialog = $(this);
+                var source = dialog.data("source");
+                var project = source.closest(".project");
+                var pid = project.attr("id").substr(8);
+                
+//                $.get("/CardBoard/board/new_task/" + pid + "/" + $("#assign_dialog_assignee").attr("value"));
+//                task.find(".assignee").text($("#assign_dialog_assignee option:selected").text());
+                dialog.dialog("close");
             }
         }
     });
