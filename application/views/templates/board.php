@@ -10,7 +10,7 @@ $states = array("backlog", "assigned", "in_progress", "done");
 foreach ($projects as $p) {
    	echo "<tr><td colspan='5' class='project_separator'></td></tr>" .
    		"<tr class='project_row' id='project-$p->id'>" .
-       	"<td class='box project'><div class='project_actions'>Actions</div>" .
+       	"<td class='box project'><div class='project_actions'><img class='new_task_action' src='media/images/add.png'/></div>" .
 		"<div class='project_name'>$p->name</div><div class='project_description'>$p->description</div>" .
 		"</td>";
 	
@@ -21,7 +21,7 @@ foreach ($projects as $p) {
 				echo "<div id='task-$t->id' class='task " . $states[$state] . "'>$t->description" .
 					"<div class='task_decorator'>" .
 					"<span class='assignee'>...</span>" .
-					"<span class='task_actions'><img class='task_back_action' src='media/images/back.svg'/><img class='task_forward_action' src='media/images/forward.svg'/></span>" .
+					"<span class='task_actions'><img class='task_back_action' src='media/images/back.png'/><img class='task_forward_action' src='media/images/forward.png'/></span>" .
 					"</div></div>";
 			}
 		}

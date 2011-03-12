@@ -26,7 +26,7 @@ body {
 
 .task_decorator {
     float: right;
-    margin: 6px 3px 3px 3px;
+    margin: 12px 3px 3px 12px;
 }
 
 .task_actions {
@@ -44,8 +44,14 @@ body {
 }
 
 img.task_back_action, img.task_forward_action {
-    width: 26px;
-    height: 16px;
+/*    width: 26px;
+    height: 16px;*/
+    cursor: hand;
+}
+
+img.new_task_action {
+/*    width: 16px;
+    height: 16px;*/
     cursor: hand;
 }
 
@@ -71,10 +77,6 @@ div.task.done img.task_forward_action {
 
 .project_actions {
     float: right;
-    border-width: 1px;
-    border-style: solid;
-    padding: 2px;
-    font-size: 0.8em;
 }
 
 .task {
