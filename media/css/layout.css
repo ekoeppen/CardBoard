@@ -54,19 +54,12 @@ body {
     cursor: pointer;
 }
 
-img.task_back_action, img.task_forward_action {
-    cursor: pointer;
-}
-
-img.new_task_action {
+img.task_back_action, img.task_forward_action, img.new_task_action, .project {
     cursor: pointer;
 }
 
 div.task.backlog img.task_forward_action,
-div.task.backlog img.task_back_action {
-    display: none;
-}
-
+div.task.backlog img.task_back_action,
 div.task.done img.task_forward_action {
     display: none;
 }
@@ -84,6 +77,14 @@ div.task.done img.task_forward_action {
 
 .project_actions {
     float: right;
+}
+
+.project_name {
+    margin-top: 2px;
+}
+
+.project_description {
+    margin-top: 6px;
 }
 
 .task {

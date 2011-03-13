@@ -13,6 +13,13 @@ echo "<div id='edit_task_dialog'>Description:
 <textarea id='edit_task_description' cols=32 rows=8></textarea>
 </div>";
 
+echo "<div id='edit_project_dialog'>
+Title:
+<input id='edit_project_name'></input>
+Description:
+<textarea id='edit_project_description' cols=32 rows=8></textarea>
+</div>";
+
 echo "<div id='task_template' style='display:none'><span class='description'></span>" .
 	"<div class='task_decorator'>" .
 		"<span class='assignee'>...</span>" .

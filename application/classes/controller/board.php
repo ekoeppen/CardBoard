@@ -32,7 +32,7 @@ class Controller_Board extends Controller_DefaultTemplate {
 		echo 1;
 	}
 	
-	public function action_set_assignee($id, $assignee)
+	public function action_set_task_assignee($id, $assignee)
 	{
 		$task = ORM::factory("task", $id);
 		$task->assignee_id = $assignee;
@@ -41,7 +41,7 @@ class Controller_Board extends Controller_DefaultTemplate {
 		echo 1;
 	}
 
-	public function action_set_description($id)
+	public function action_set_task_description($id)
 	{
 		$task = ORM::factory("task", $id);
 		$task->description = $_POST['description'];
@@ -61,4 +61,14 @@ class Controller_Board extends Controller_DefaultTemplate {
 		echo $task->id;
 	}
 
-} // End Welcome
+	public function action_set_project_data($id)
+	{
+		$project = ORM::factory("project", $id);
+		$project->description = $_POST['description'];
+		$project->name = $_POST['name'];
+		$project->save();
+		$this->auto_render = FALSE;
+		echo $project->id;
+	}
+
+}

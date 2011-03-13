@@ -36,6 +36,14 @@ function open_edit_task_dialog(task) {
     dialog.dialog('open');
 }
 
+function open_edit_project_dialog(project) {
+    var dialog = $("#edit_project_dialog");
+    dialog.find("#edit_project_name").val(project.find(".project_name").text());
+    dialog.find("#edit_project_description").val(project.find(".project_description").text());
+    dialog.data("source", project);
+    dialog.dialog('open');
+}
+
 $(document).ready(function() {
     $("img.task_forward_action").click(function(event) {
         change_state($(this), true);
@@ -51,6 +59,10 @@ $(document).ready(function() {
     
     $(".description").click(function(event) {
         open_edit_task_dialog($(this));
+    });
+    
+    $(".project").click(function(event) {
+       open_edit_project_dialog($(this));
     });
     
     $("img.new_task_action").click(function(event) {
@@ -69,7 +81,7 @@ $(document).ready(function() {
                 var task = source.closest(".task");
                 var tid = task.attr("id").substr(5);
                 
-                $.get("/CardBoard/board/set_assignee/" + tid + "/" + $("#assign_dialog_assignee").attr("value"));
+                $.get("/CardBoard/board/set_task_assignee/" + tid + "/" + $("#assign_dialog_assignee").attr("value"));
                 task.find(".assignee").text($("#assign_dialog_assignee option:selected").text());
                 dialog.dialog("close");
                 if (task.hasClass("backlog")) {
@@ -141,9 +153,36 @@ $(document).ready(function() {
                 task.find(".description").text(description);
 
                 $.ajax({
-                    url: "/CardBoard/board/set_description/" + tid,
+                    url: "/CardBoard/board/set_task_description/" + tid,
                     type: 'POST',
                     data: {description: description},
+                    success: function(data, status, query) {
+                        dialog.dialog("close");
+                    }
+                });
+            }
+        }
+    });
+    
+    $("#edit_project_dialog").dialog({
+        title: "Edit Project",
+        autoOpen: false,
+        width: 400,
+        buttons: {
+            "Ok": function() {
+                var dialog = $(this);
+                var project = dialog.data("source");
+                var name = dialog.find("#edit_project_name").val();
+                var description = dialog.find("#edit_project_description").val();
+                var pid = project.closest(".project_row").attr('id').substr(8);
+                
+                project.find(".project_name").text(name);
+                project.find(".project_description").text(description);
+
+                $.ajax({
+                    url: "/CardBoard/board/set_project_data/" + pid,
+                    type: 'POST',
+                    data: {description: description, name: name},
                     success: function(data, status, query) {
                         dialog.dialog("close");
                     }
