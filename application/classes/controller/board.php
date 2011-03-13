@@ -28,6 +28,7 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$task = ORM::factory("task", $id);
 		$task->status = Controller_Board::$states[$state];
 		$task->save();
+		$this->auto_render = FALSE;
 		echo 1;
 	}
 	
@@ -36,7 +37,19 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$task = ORM::factory("task", $id);
 		$task->assignee_id = $assignee;
 		$task->save();
+		$this->auto_render = FALSE;
 		echo 1;
+	}
+
+	public function action_new_task($project)
+	{
+		$task = ORM::factory("task");
+		$task->description = "";
+		$task->project_id = $project;
+		$task->description = $_POST['description'];
+		$task->save();
+		$this->auto_render = FALSE;
+		echo $task->id;
 	}
 
 } // End Welcome

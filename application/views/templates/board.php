@@ -5,7 +5,15 @@ foreach ($assignees as $i => $a) {
 }
 echo "</select></div>";
 
-echo "<div id='new_task_dialog'></div>";
+echo "<div id='new_task_dialog'>Description:
+<textarea id='new_task_description' cols=32 rows=8></textarea>
+</div>";
+
+echo "<div id='task_template' style='display:none'>" .
+	"<div class='task_decorator'>" .
+		"<span class='assignee'>...</span>" .
+		"<span class='task_actions'><img class='task_back_action' src='media/images/back.png'/><img class='task_forward_action' src='media/images/forward.png'/></span>" .
+	"</div></div>";
 
 $states = array("backlog", "assigned", "in_progress", "done");
 
