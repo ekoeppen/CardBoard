@@ -29,6 +29,13 @@ function open_assignee_dialog(button) {
     dialog.dialog('open');
 }
 
+function open_edit_task_dialog(task) {
+    var dialog = $("#edit_task_dialog");
+    dialog.find("#edit_task_description").val(task.text());
+    dialog.data("source", task);
+    dialog.dialog('open');
+}
+
 $(document).ready(function() {
     $("img.task_forward_action").click(function(event) {
         change_state($(this), true);
@@ -42,8 +49,10 @@ $(document).ready(function() {
         open_assignee_dialog($(this));
     });
     
-    $("#new_task_dialog").dialog({width: 400, autoOpen: false});
-
+    $(".description").click(function(event) {
+        open_edit_task_dialog($(this));
+    });
+    
     $("img.new_task_action").click(function(event) {
         var dialog = $("#new_task_dialog");
         dialog.data("source", $(this));
@@ -73,6 +82,7 @@ $(document).ready(function() {
     $("#new_task_dialog").dialog({
         title: "New Task",
         autoOpen: false,
+        width: 400,
         buttons: {
             "Ok": function() {
                 var dialog = $(this);
@@ -93,7 +103,11 @@ $(document).ready(function() {
                     open_assignee_dialog($(this));
                 });
                 
-                task.prepend(description);
+                task.find(".description").click(function(event) {
+                    open_edit_task_dialog($(this));
+                });
+                
+                task.find(".description").text(description);
 
                 $.ajax({
                     url: "/CardBoard/board/new_task/" + pid,
@@ -106,6 +120,32 @@ $(document).ready(function() {
 
                         dialog.dialog("close");
                         $("#project-" + pid + "-backlog").append(task);
+                    }
+                });
+            }
+        }
+    });
+
+    $("#edit_task_dialog").dialog({
+        title: "Edit Task",
+        autoOpen: false,
+        width: 400,
+        buttons: {
+            "Ok": function() {
+                var dialog = $(this);
+                var source = dialog.data("source");
+                var task = source.closest(".task");
+                var tid = task.attr("id").substr(5);
+                var description = dialog.find("#edit_task_description").val();
+                
+                task.find(".description").text(description);
+
+                $.ajax({
+                    url: "/CardBoard/board/set_description/" + tid,
+                    type: 'POST',
+                    data: {description: description},
+                    success: function(data, status, query) {
+                        dialog.dialog("close");
                     }
                 });
             }

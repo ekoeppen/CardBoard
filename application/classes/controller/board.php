@@ -41,6 +41,15 @@ class Controller_Board extends Controller_DefaultTemplate {
 		echo 1;
 	}
 
+	public function action_set_description($id)
+	{
+		$task = ORM::factory("task", $id);
+		$task->description = $_POST['description'];
+		$task->save();
+		$this->auto_render = FALSE;
+		echo $task->id;
+	}
+
 	public function action_new_task($project)
 	{
 		$task = ORM::factory("task");

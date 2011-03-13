@@ -38,6 +38,11 @@ body {
 .task_actions {
 }
 
+.description {
+    padding: 6px;
+    cursor: pointer;
+}
+
 .assignee {
     display: block-inline;
     vertical-align: top;
@@ -46,15 +51,15 @@ body {
     border-width: 1px;
     border-style: solid;
     padding: 2px 4px 2px 4px;
-    cursor: hand;
+    cursor: pointer;
 }
 
 img.task_back_action, img.task_forward_action {
-    cursor: hand;
+    cursor: pointer;
 }
 
 img.new_task_action {
-    cursor: hand;
+    cursor: pointer;
 }
 
 div.task.backlog img.task_forward_action,
