@@ -71,4 +71,29 @@ class Controller_Board extends Controller_DefaultTemplate {
 		echo $project->id;
 	}
 
+	public function action_new_project()
+	{
+		$project = ORM::factory("project");
+		$project->description = $_POST['description'];
+		$project->name = $_POST['name'];
+		$project->save();
+		$this->auto_render = FALSE;
+		echo $project->id;
+	}
+
+	public function action_delete_project($id)
+	{
+		$project = ORM::factory("project", $id);
+		$project->delete();
+		$this->auto_render = FALSE;
+		echo $project->id;
+	}
+
+	public function action_clear_project($id)
+	{
+		DB::update('tasks')->where('project_id', '=', $id)->and_where('status', '=', 3)->set(array('status' => 4))->execute();
+		$this->auto_render = FALSE;
+		echo $id;
+	}
+
 }

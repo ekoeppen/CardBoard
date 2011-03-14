@@ -54,7 +54,7 @@ body {
     cursor: pointer;
 }
 
-img.task_back_action, img.task_forward_action, img.new_task_action, .project {
+img.task_back_action, img.task_forward_action, img.new_task_action, .project_name, .project_description, img.add_project {
     cursor: pointer;
 }
 
@@ -75,8 +75,9 @@ div.task.done img.task_forward_action {
     padding: 0px;
 }
 
-.project_actions {
+.project_actions, .board_actions {
     float: right;
+    cursor: pointer;
 }
 
 .project_name {
@@ -85,6 +86,10 @@ div.task.done img.task_forward_action {
 
 .project_description {
     margin-top: 6px;
+}
+
+img.delete_project_action {
+    padding: 2px;
 }
 
 .task {

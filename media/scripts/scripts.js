@@ -44,6 +44,12 @@ function open_edit_project_dialog(project) {
     dialog.dialog('open');
 }
 
+function open_add_project_dialog(project) {
+    var dialog = $("#add_project_dialog");
+    dialog.data("source", project);
+    dialog.dialog('open');
+}
+
 $(document).ready(function() {
     $("img.task_forward_action").click(function(event) {
         change_state($(this), true);
@@ -61,7 +67,11 @@ $(document).ready(function() {
         open_edit_task_dialog($(this));
     });
     
-    $(".project").click(function(event) {
+    $(".project_name").click(function(event) {
+       open_edit_project_dialog($(this));
+    });
+    
+    $(".project_description").click(function(event) {
        open_edit_project_dialog($(this));
     });
     
@@ -69,6 +79,28 @@ $(document).ready(function() {
         var dialog = $("#new_task_dialog");
         dialog.data("source", $(this));
         dialog.dialog('open');
+    });
+    
+    $("img.delete_project_action").click(function(event) {
+        if (confirm("Delete project?")) {
+            var pid = $(this).closest(".project_row").attr("id").substr(8);
+            $.get("/CardBoard/board/delete_project/" + pid);
+            var project = $("#project-" + pid);
+            project.prev().remove();
+            project.remove();
+        }
+    });
+    
+    $("img.clear_project_action").click(function(event) {
+        if (confirm("Clear done tasks?")) {
+            var pid = $(this).closest(".project_row").attr("id").substr(8);
+            $.get("/CardBoard/board/clear_project/" + pid);
+            $("#project-" + pid + "-done div.task.done").remove();
+        }
+    });
+    
+    $("img.add_project").click(function(event) {
+        open_add_project_dialog($(this));
     });
 
     $("#assign_dialog").dialog({
@@ -185,6 +217,30 @@ $(document).ready(function() {
                     data: {description: description, name: name},
                     success: function(data, status, query) {
                         dialog.dialog("close");
+                    }
+                });
+            }
+        }
+    });
+
+    $("#add_project_dialog").dialog({
+        title: "Add Project",
+        autoOpen: false,
+        width: 400,
+        buttons: {
+            "Ok": function() {
+                var dialog = $(this);
+                var project = dialog.data("source");
+                var name = dialog.find("#edit_project_name").val();
+                var description = dialog.find("#edit_project_description").val();
+                
+                $.ajax({
+                    url: "/CardBoard/board/new_project",
+                    type: 'POST',
+                    data: {description: description, name: name},
+                    success: function(data, status, query) {
+                        dialog.dialog("close");
+                        window.location.reload();
                     }
                 });
             }
