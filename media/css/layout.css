@@ -114,3 +114,8 @@ img.delete_project_action {
     border-radius: 6px;
     -moz-border-radius: 6px;
 }
+
+table.taskboard {
+    clear: both
+}
+
