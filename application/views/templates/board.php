@@ -40,7 +40,7 @@ echo "<div class='board_actions'><img class='add_project' src='media/images/add_
 foreach ($projects as $p) {
    	echo "<tr><td colspan='6' class='project_separator'></td></tr>" .
    		"<tr class='project_row' id='project-$p->id'>" .
-       	"<td class='box project'><div class='project_name'>$p->name</div><div class='project_description'>$p->description</div>" .
+       	"<td class='box project' rowspan='2'><div class='project_name'>$p->name</div><div class='project_description'>$p->description</div>" .
 		"</td>";
 	
 	for ($state = 0; $state < 4; $state++) {
@@ -66,9 +66,12 @@ foreach ($projects as $p) {
 		"<img class='new_task_action' src='media/images/add.png'/>" .
 		"<img class='clear_project_action' src='media/images/ok.png'/>" . 
 		"<img class='delete_project_action' src='media/images/delete.png'/>" . 
-		"</div></td>";
+		"</div></td></tr>";
 
-   	echo "</tr>";
+	echo "<tr><td class='deliverables_box' colspan='4'></td>" .
+		"<td class='deliverables_actions_box'><div class='project_deliverables_actions'>" . 
+		"<img class='new_deliverable_action' src='media/images/add.png'/>" .
+		"</div></td></tr>";
 }
 
 echo "</table>";
