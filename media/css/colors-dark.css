@@ -39,6 +39,7 @@ body {
     color: black;
 }
 
+.deliverable,
 .task {
     color: black;
     border-color: #666;

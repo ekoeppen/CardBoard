@@ -36,6 +36,13 @@ function open_edit_task_dialog(task) {
     dialog.dialog('open');
 }
 
+function open_edit_deliverable_dialog(task) {
+    var dialog = $("#edit_deliverable_dialog");
+    dialog.find("#edit_deliverable_description").val(task.text());
+    dialog.data("source", task);
+    dialog.dialog('open');
+}
+
 function open_edit_project_dialog(project) {
     var dialog = $("#edit_project_dialog");
     dialog.find("#edit_project_name").val(project.find(".project_name").text());
@@ -67,6 +74,10 @@ $(document).ready(function() {
         open_edit_task_dialog($(this));
     });
     
+    $(".deliverable_description").click(function(event) {
+        open_edit_deliverable_dialog($(this));
+    });
+    
     $(".project_name").click(function(event) {
        open_edit_project_dialog($(this));
     });
@@ -77,6 +88,12 @@ $(document).ready(function() {
     
     $("img.new_task_action").click(function(event) {
         var dialog = $("#new_task_dialog");
+        dialog.data("source", $(this));
+        dialog.dialog('open');
+    });
+    
+    $("img.new_deliverable_action").click(function(event) {
+        var dialog = $("#new_deliverable_dialog");
         dialog.data("source", $(this));
         dialog.dialog('open');
     });
@@ -186,6 +203,67 @@ $(document).ready(function() {
 
                 $.ajax({
                     url: "/CardBoard/board/set_task_description/" + tid,
+                    type: 'POST',
+                    data: {description: description},
+                    success: function(data, status, query) {
+                        dialog.dialog("close");
+                    }
+                });
+            }
+        }
+    });
+    
+    $("#new_deliverable_dialog").dialog({
+        title: "New Deliverable",
+        autoOpen: false,
+        width: 400,
+        buttons: {
+            "Ok": function() {
+                var dialog = $(this);
+                var source = dialog.data("source");
+                var pid = source.closest(".project_row").attr("id").substr(8);
+                var description = dialog.find("#new_deliverable_description").val();
+                var deliverable = $("#deliverable_template").clone();
+                
+                deliverable.find(".description").click(function(event) {
+                    open_edit_deliverable_dialog($(this));
+                });
+                
+                deliverable.find(".description").text(description);
+
+                $.ajax({
+                    url: "/CardBoard/board/new_deliverable/" + pid,
+                    type: 'POST',
+                    data: {description: description},
+                    success: function(data, status, query) {
+                        var did = data;
+                        deliverable.attr({id: 'deliverable-' + did, 'class': 'deliverable yellow'});
+                        deliverable.removeAttr('style');
+
+                        dialog.dialog("close");
+                        $("#project-" + pid + "-backlog").append(deliverable);
+                    }
+                });
+            }
+        }
+    });
+
+    $("#edit_deliverable_dialog").dialog({
+        title: "Edit Deliverable",
+        autoOpen: false,
+        width: 400,
+        buttons: {
+            "Ok": function() {
+                var dialog = $(this);
+                var source = dialog.data("source");
+                var deliverable = source.closest(".deliverable");
+                var did = deliverable.attr("id").substr(12);
+                var description = dialog.find("#edit_deliverable_description").val();
+                
+                deliverable.find(".deliverable_description").text(description);
+
+                $.ajax({
+                    url: "/CardBoard/board/set_deliverable_description/" + did,
                     type: 'POST',
                     data: {description: description},
                     success: function(data, status, query) {

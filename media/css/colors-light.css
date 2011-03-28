@@ -38,9 +38,22 @@ body {
     color: black;
 }
 
+.deliverable,
 .task {
     color: black;
     background-color: #FEFBF1;
+}
+
+.deliverable.red {
+    background-color: red;
+}
+
+.deliverable.green {
+    background-color: #3c3;
+}
+
+.deliverable.yellow {
+    background-color: yellow;
 }
 
 .assignee {

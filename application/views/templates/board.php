@@ -9,8 +9,16 @@ echo "<div id='new_task_dialog'>Description:
 <textarea id='new_task_description' cols=32 rows=8></textarea>
 </div>";
 
+echo "<div id='new_deliverable_dialog'>Description:
+<textarea id='new_deliverable_description' cols=32 rows=8></textarea>
+</div>";
+
 echo "<div id='edit_task_dialog'>Description:
 <textarea id='edit_task_description' cols=32 rows=8></textarea>
+</div>";
+
+echo "<div id='edit_deliverable_dialog'>Description:
+<textarea id='edit_deliverable_description' cols=32 rows=8></textarea>
 </div>";
 
 echo "<div id='edit_project_dialog'>
@@ -34,6 +42,7 @@ echo "<div id='task_template' style='display:none'><span class='description'></s
 	"</div></div>";
 
 $states = array("backlog", "assigned", "in_progress", "done");
+$deliverables_states = array("green", "yellow", "red");
 
 echo "<div class='board_actions'><img class='add_project' src='media/images/add_project.png'/></div><table class='taskboard'>";
 
@@ -68,8 +77,18 @@ foreach ($projects as $p) {
 		"<img class='delete_project_action' src='media/images/delete.png'/>" . 
 		"</div></td></tr>";
 
-	echo "<tr><td class='deliverables_box' colspan='4'></td>" .
-		"<td class='deliverables_actions_box'><div class='project_deliverables_actions'>" . 
+	echo "<tr><td class='deliverables_box' colspan='4'>";
+	
+	foreach ($deliverables as $d) {
+		if ($d->project_id == $p->id) {
+			echo "<div id='deliverable-$d->id' class='deliverable " . $deliverables_states[$d->status] ."'><span class='deliverable_description'>" . $d->description . "</span>" .
+				"<div class='deliverable_decorator'>" .
+				"</div></div>";
+		}
+	}
+	
+	
+	echo "</td><td class='deliverables_actions_box'><div class='project_deliverables_actions'>" . 
 		"<img class='new_deliverable_action' src='media/images/add.png'/>" .
 		"</div></td></tr>";
 }

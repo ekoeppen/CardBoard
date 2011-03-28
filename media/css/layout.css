@@ -50,6 +50,7 @@ body {
 .task_actions {
 }
 
+.deliverable_description,
 .description {
     padding: 6px;
     cursor: pointer;
@@ -104,6 +105,7 @@ img.delete_project_action {
     padding: 2px;
 }
 
+.deliverable,
 .task {
     float: left;
     border-width: 1px solid;

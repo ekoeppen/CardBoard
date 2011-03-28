@@ -15,6 +15,7 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$param =  array();
 		$params['projects'] = ORM::factory("project")->find_all();
 		$params['tasks'] = ORM::factory("task")->find_all();
+		$params['deliverables'] = ORM::factory("deliverable")->find_all();
 		$assignees = ORM::factory("person")->find_all();
 		$params['assignees'] = array();
 		foreach ($assignees as $a) {
@@ -58,6 +59,27 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$task->description = $_POST['description'];
 		$task->save();
 		$this->auto_render = FALSE;
+		echo $task->id;
+	}
+
+	public function action_set_deliverable_description($id)
+	{
+		$deliverable = ORM::factory("deliverable", $id);
+		$deliverable->description = $_POST['description'];
+		$deliverable->save();
+		$this->auto_render = FALSE;
+		echo $deliverable->id;
+	}
+
+	public function action_new_deliverable($project)
+	{
+		$deliverable = ORM::factory("deliverable");
+		$deliverable->description = "";
+		$deliverable->project_id = $project;
+		$deliverable->status = 1;
+		$deliverable->description = $_POST['description'];
+		$deliverable->save();
+		$deliverable->auto_render = FALSE;
 		echo $task->id;
 	}
 
