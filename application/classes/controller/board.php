@@ -79,8 +79,8 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$deliverable->status = 1;
 		$deliverable->description = $_POST['description'];
 		$deliverable->save();
-		$deliverable->auto_render = FALSE;
-		echo $task->id;
+		$this->auto_render = FALSE;
+		echo $deliverable->id;
 	}
 
 	public function action_set_project_data($id)

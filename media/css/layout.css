@@ -67,7 +67,8 @@ body {
     cursor: pointer;
 }
 
-img.task_back_action, img.task_forward_action, img.new_task_action, .project_name, .project_description, img.add_project {
+img.task_back_action, img.task_forward_action, img.new_task_action,
+.project_name, .project_description, img.add_project, img.new_deliverable_action {
     cursor: pointer;
 }
 

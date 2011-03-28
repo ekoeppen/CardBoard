@@ -41,6 +41,8 @@ echo "<div id='task_template' style='display:none'><span class='description'></s
 		"<span class='task_actions'><img class='task_back_action' src='media/images/back.png'/><img class='task_forward_action' src='media/images/forward.png'/></span>" .
 	"</div></div>";
 
+echo "<div id='deliverable_template' style='display:none'><span class='description'></span></div>";
+
 $states = array("backlog", "assigned", "in_progress", "done");
 $deliverables_states = array("green", "yellow", "red");
 
@@ -77,7 +79,7 @@ foreach ($projects as $p) {
 		"<img class='delete_project_action' src='media/images/delete.png'/>" . 
 		"</div></td></tr>";
 
-	echo "<tr><td class='deliverables_box' colspan='4'>";
+	echo "<tr class='project_deliverables_row'><td class='deliverables_box' id='project-$p->id-deliverables' colspan='4'>";
 	
 	foreach ($deliverables as $d) {
 		if ($d->project_id == $p->id) {

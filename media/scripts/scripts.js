@@ -221,7 +221,7 @@ $(document).ready(function() {
             "Ok": function() {
                 var dialog = $(this);
                 var source = dialog.data("source");
-                var pid = source.closest(".project_row").attr("id").substr(8);
+                var pid = source.closest("tr").prev(".project_row").attr("id").substr(8);
                 var description = dialog.find("#new_deliverable_description").val();
                 var deliverable = $("#deliverable_template").clone();
                 
@@ -241,7 +241,7 @@ $(document).ready(function() {
                         deliverable.removeAttr('style');
 
                         dialog.dialog("close");
-                        $("#project-" + pid + "-backlog").append(deliverable);
+                        $("#project-" + pid + "-deliverables").append(deliverable);
                     }
                 });
             }
