@@ -62,10 +62,19 @@ class Controller_Board extends Controller_DefaultTemplate {
 		echo $task->id;
 	}
 
-	public function action_set_deliverable_description($id)
+	public function action_delete_task($id)
+	{
+		$task = ORM::factory("task", $id);
+		$task->delete();
+		$this->auto_render = FALSE;
+		echo $id;
+	}
+
+	public function action_set_deliverable_values($id)
 	{
 		$deliverable = ORM::factory("deliverable", $id);
 		$deliverable->description = $_POST['description'];
+		$deliverable->status = $_POST['status'];
 		$deliverable->save();
 		$this->auto_render = FALSE;
 		echo $deliverable->id;
@@ -81,6 +90,14 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$deliverable->save();
 		$this->auto_render = FALSE;
 		echo $deliverable->id;
+	}
+
+	public function action_delete_deliverable($id)
+	{
+		$deliverable = ORM::factory("deliverable", $id);
+		$deliverable->delete();
+		$this->auto_render = FALSE;
+		echo $id;
 	}
 
 	public function action_set_project_data($id)

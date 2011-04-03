@@ -19,6 +19,12 @@ echo "<div id='edit_task_dialog'>Description:
 
 echo "<div id='edit_deliverable_dialog'>Description:
 <textarea id='edit_deliverable_description' cols=32 rows=8></textarea>
+<br/>
+<select id='edit_deliverable_status'>
+<option id='edit_deliverable_status_green' value='0'>Green</option>
+<option id='edit_deliverable_status_yellow' value='1'>Yellow</option>
+<option id='edit_deliverable_status_red' value='2'>Red</option>
+</select>
 </div>";
 
 echo "<div id='edit_project_dialog'>
@@ -76,7 +82,6 @@ foreach ($projects as $p) {
 	echo "<td class='box last_box'><div class='project_actions'>" . 
 		"<img class='new_task_action' src='media/images/add.png'/>" .
 		"<img class='clear_project_action' src='media/images/ok.png'/>" . 
-		"<img class='delete_project_action' src='media/images/delete.png'/>" . 
 		"</div></td></tr>";
 
 	echo "<tr class='project_deliverables_row'><td class='deliverables_box' id='project-$p->id-deliverables' colspan='4'>";

@@ -5,6 +5,8 @@ var task_states = {
   "done": {"next": null, "previous": "in_progress"}
 };
 
+var deliverable_states = ["green", "yellow", "red"];
+
 function change_state(button, forward) {
     var project = button.closest(".project_row"), pid = project.attr("id");
     var task = button.closest(".task"), tid = task.attr("id").substr(5);
@@ -36,15 +38,24 @@ function open_edit_task_dialog(task) {
     dialog.dialog('open');
 }
 
-function open_edit_deliverable_dialog(task) {
+function open_edit_deliverable_dialog(deliverable) {
     var dialog = $("#edit_deliverable_dialog");
-    dialog.find("#edit_deliverable_description").val(task.text());
-    dialog.data("source", task);
+    dialog.find("#edit_deliverable_description").val(deliverable.find(".deliverable_description").text());
+    dialog.find("option").removeAttr('selected');
+    if (deliverable.hasClass("green")) {
+        dialog.find("#edit_deliverable_status_green").attr('selected', 1);
+    } else if (deliverable.hasClass("yellow")) {
+        dialog.find("#edit_deliverable_status_yellow").attr('selected', 1);
+    } else if (deliverable.hasClass("red")) {
+        dialog.find("#edit_deliverable_status_red").attr('selected', 1);
+    }
+    dialog.data("source", deliverable);
     dialog.dialog('open');
 }
 
-function open_edit_project_dialog(project) {
+function open_edit_project_dialog(project_field) {
     var dialog = $("#edit_project_dialog");
+    var project = project_field.parent();
     dialog.find("#edit_project_name").val(project.find(".project_name").text());
     dialog.find("#edit_project_description").val(project.find(".project_description").text());
     dialog.data("source", project);
@@ -75,9 +86,9 @@ $(document).ready(function() {
     });
     
     $(".deliverable_description").click(function(event) {
-        open_edit_deliverable_dialog($(this));
+        open_edit_deliverable_dialog($(this).parent());
     });
-    
+
     $(".project_name").click(function(event) {
        open_edit_project_dialog($(this));
     });
@@ -89,11 +100,13 @@ $(document).ready(function() {
     $("img.new_task_action").click(function(event) {
         var dialog = $("#new_task_dialog");
         dialog.data("source", $(this));
+        dialog.find("#new_task_description").val("");
         dialog.dialog('open');
     });
     
     $("img.new_deliverable_action").click(function(event) {
         var dialog = $("#new_deliverable_dialog");
+        dialog.find("#new_deliverable_description").val("");
         dialog.data("source", $(this));
         dialog.dialog('open');
     });
@@ -192,6 +205,21 @@ $(document).ready(function() {
         autoOpen: false,
         width: 400,
         buttons: {
+            "Delete": function() {
+                var dialog = $(this);
+                var source = dialog.data("source");
+                var task = source.closest(".task");
+                var tid = task.attr("id").substr(5);
+                
+                $.ajax({
+                    url: "/CardBoard/board/delete_task/" + tid,
+                    type: 'POST',
+                    success: function(data, status, query) {
+                        dialog.dialog("close");
+                        task.remove();
+                    }
+                });
+            },
             "Ok": function() {
                 var dialog = $(this);
                 var source = dialog.data("source");
@@ -253,19 +281,37 @@ $(document).ready(function() {
         autoOpen: false,
         width: 400,
         buttons: {
+            "Delete": function() {
+                var dialog = $(this);
+                var deliverable = dialog.data("source");
+                var did = deliverable.attr("id").substr(12);
+                
+                $.ajax({
+                    url: "/CardBoard/board/delete_deliverable/" + did,
+                    type: 'POST',
+                    success: function(data, status, query) {
+                        dialog.dialog("close");
+                        deliverable.remove();
+                    }
+                });
+            },
             "Ok": function() {
                 var dialog = $(this);
-                var source = dialog.data("source");
-                var deliverable = source.closest(".deliverable");
+                var deliverable = dialog.data("source");
                 var did = deliverable.attr("id").substr(12);
                 var description = dialog.find("#edit_deliverable_description").val();
+                var status = dialog.find("#edit_deliverable_status :selected").attr('value');
                 
                 deliverable.find(".deliverable_description").text(description);
+                deliverable.removeClass('yellow');
+                deliverable.removeClass('green');
+                deliverable.removeClass('red');
+                deliverable.addClass(deliverable_states[status]);
 
                 $.ajax({
-                    url: "/CardBoard/board/set_deliverable_description/" + did,
+                    url: "/CardBoard/board/set_deliverable_values/" + did,
                     type: 'POST',
-                    data: {description: description},
+                    data: {description: description, status: status},
                     success: function(data, status, query) {
                         dialog.dialog("close");
                     }
@@ -279,6 +325,21 @@ $(document).ready(function() {
         autoOpen: false,
         width: 400,
         buttons: {
+            "Delete": function() {
+                var dialog = $(this);
+                if (confirm("Delete project?")) {
+                    var project = dialog.data("source");
+                    var pid = project.closest(".project_row").attr('id').substr(8);
+
+                    $.get("/CardBoard/board/delete_project/" + pid);
+
+                    project = $("#project-" + pid);
+                    project.prev().remove();
+                    project.next().remove();
+                    project.remove();
+                }
+                dialog.dialog("close");
+            },
             "Ok": function() {
                 var dialog = $(this);
                 var project = dialog.data("source");
