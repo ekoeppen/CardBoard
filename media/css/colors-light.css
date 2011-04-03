@@ -49,11 +49,11 @@ table.taskboard {
 }
 
 .deliverable.red {
-    background-color: red;
+    background-color: #d33;
 }
 
 .deliverable.green {
-    background-color: #3c3;
+    background-color: #3a3;
 }
 
 .deliverable.yellow {
