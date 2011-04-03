@@ -12,6 +12,7 @@ body {
     vertical-align: top;
     border-right-width: 2px;
     border-right-style: dotted;
+    padding: 3px;
 }
 
 .last_box {

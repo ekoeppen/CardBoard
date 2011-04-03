@@ -111,5 +111,5 @@ foreach ($projects as $p) {
 		"</div></td></tr>";
 }
 
-echo "</table>";
+echo "<tr><td colspan='6' class='project_separator'></td></tr></table>";
 

@@ -17,7 +17,7 @@ table.taskboard {
 }
 
 .backlog {
-	background-color: white;
+    border-color: #586e75;
 }
 
 .in_progress {
@@ -44,8 +44,11 @@ table.taskboard {
 .deliverable,
 .task {
     color: black;
-    border-color: #586e75;
     background-color: #FEFBF1;
+}
+
+.deliverable {
+    border-color: #586e75;
 }
 
 .deliverable.red {
