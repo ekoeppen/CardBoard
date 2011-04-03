@@ -135,4 +135,10 @@ class Controller_Board extends Controller_DefaultTemplate {
 		echo $id;
 	}
 
+	public function action_format()
+	{
+		$parser = new Helper_Formatter();
+		$this->auto_render = FALSE;
+		echo $parser->transform($_POST['text']);
+	}
 }

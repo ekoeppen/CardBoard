@@ -7,6 +7,30 @@ var task_states = {
 
 var deliverable_states = ["green", "yellow", "red"];
 
+function get_sync(model, field, id) {
+    var r = "";
+
+    jQuery.ajax({
+        url: "/CardBoard/" + model + "/"  + field +  "/" + id,
+        async: false,
+        success:function(html) { r = html; }
+    });
+    return r;
+}
+
+function format(text) {
+    var r = "";
+
+    jQuery.ajax({
+        url: "/CardBoard/board/format",
+        type: 'POST',
+        data: {text: text},
+        async: false,
+        success:function(html) { r = html; }
+    });
+    return r;
+}
+
 function change_state(button, forward) {
     var project = button.closest(".project_row"), pid = project.attr("id");
     var task = button.closest(".task"), tid = task.attr("id").substr(5);
@@ -33,14 +57,14 @@ function open_assignee_dialog(button) {
 
 function open_edit_task_dialog(task) {
     var dialog = $("#edit_task_dialog");
-    dialog.find("#edit_task_description").val(task.text());
+    dialog.find("#edit_task_description").val(get_sync("task", "description", task.parent().attr("id").substr(5)));
     dialog.data("source", task);
     dialog.dialog('open');
 }
 
 function open_edit_deliverable_dialog(deliverable) {
     var dialog = $("#edit_deliverable_dialog");
-    dialog.find("#edit_deliverable_description").val(deliverable.find(".deliverable_description").text());
+    dialog.find("#edit_deliverable_description").val(get_sync("deliverable", "description", deliverable.attr("id").substr(12)));
     dialog.find("option").removeAttr('selected');
     if (deliverable.hasClass("green")) {
         dialog.find("#edit_deliverable_status_green").attr('selected', 1);
@@ -57,7 +81,7 @@ function open_edit_project_dialog(project_field) {
     var dialog = $("#edit_project_dialog");
     var project = project_field.parent();
     dialog.find("#edit_project_name").val(project.find(".project_name").text());
-    dialog.find("#edit_project_description").val(project.find(".project_description").text());
+    dialog.find("#edit_project_description").val(get_sync("project", "description", project.parent().attr("id").substr(8)));
     dialog.data("source", project);
     dialog.dialog('open');
 }
@@ -227,7 +251,7 @@ $(document).ready(function() {
                 var tid = task.attr("id").substr(5);
                 var description = dialog.find("#edit_task_description").val();
                 
-                task.find(".description").text(description);
+                task.find(".description").html(format(description));
 
                 $.ajax({
                     url: "/CardBoard/board/set_task_description/" + tid,
@@ -302,7 +326,7 @@ $(document).ready(function() {
                 var description = dialog.find("#edit_deliverable_description").val();
                 var status = dialog.find("#edit_deliverable_status :selected").attr('value');
                 
-                deliverable.find(".deliverable_description").text(description);
+                deliverable.find(".deliverable_description").html(format(description));
                 deliverable.removeClass('yellow');
                 deliverable.removeClass('green');
                 deliverable.removeClass('red');
@@ -348,7 +372,7 @@ $(document).ready(function() {
                 var pid = project.closest(".project_row").attr('id').substr(8);
                 
                 project.find(".project_name").text(name);
-                project.find(".project_description").text(description);
+                project.find(".project_description").html(format(description));
 
                 $.ajax({
                     url: "/CardBoard/board/set_project_data/" + pid,

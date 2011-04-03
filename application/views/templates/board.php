@@ -1,4 +1,7 @@
 <?php
+
+$parser = new Helper_Formatter();
+
 echo "<div id='assign_dialog'>Assign to: <select name='assignee_dialog_select' id='assign_dialog_assignee'>";
 foreach ($assignees as $i => $a) {
 	echo "<option value='$i'>" . $a->name . "</option>";
@@ -57,14 +60,19 @@ echo "<div class='board_actions'><img class='add_project' src='media/images/add_
 foreach ($projects as $p) {
    	echo "<tr><td colspan='6' class='project_separator'></td></tr>" .
    		"<tr class='project_row' id='project-$p->id'>" .
-       	"<td class='box project' rowspan='2'><div class='project_name'>$p->name</div><div class='project_description'>$p->description</div>" .
-		"</td>";
+       	"<td class='box project' rowspan='2'><div class='project_name'>$p->name</div>".
+		"<div class='project_description'>" .
+		$parser->transform($p->description) .
+		"</div></td>";
 	
 	for ($state = 0; $state < 4; $state++) {
 		echo "<td class='box' id='project-$p->id-" . $states[$state] . "'>";
 		foreach ($tasks as $t) {
 			if ($t->project_id == $p->id && $t->status == $state) {
-				echo "<div id='task-$t->id' class='task " . $states[$state] . "'><span class='description'>" . $t->description . "</span>" .
+				echo "<div id='task-$t->id' class='task " . $states[$state] .
+					"'><span class='description'>" .
+					$parser->transform($t->description) .
+					"</span>" .
 					"<div class='task_decorator'>" .
 					"<span class='assignee'>";
 				if ($t->assignee_id) {
@@ -88,7 +96,9 @@ foreach ($projects as $p) {
 	
 	foreach ($deliverables as $d) {
 		if ($d->project_id == $p->id) {
-			echo "<div id='deliverable-$d->id' class='deliverable " . $deliverables_states[$d->status] ."'><span class='deliverable_description'>" . $d->description . "</span>" .
+			echo "<div id='deliverable-$d->id' class='deliverable " .
+				$deliverables_states[$d->status] ."'><span class='deliverable_description'>" .
+				$parser->transform($d->description) . "</span>" .
 				"<div class='deliverable_decorator'>" .
 				"</div></div>";
 		}

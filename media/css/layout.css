@@ -53,8 +53,8 @@ body {
 
 .deliverable_description,
 .description {
-    padding: 6px;
     cursor: pointer;
+    text-align: left;
 }
 
 .assignee {
@@ -128,3 +128,10 @@ table.taskboard {
     clear: both
 }
 
+span p {
+    margin: 0;
+}
+
+span ul {
+    margin: 0.2em;
+}
