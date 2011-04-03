@@ -1,15 +1,19 @@
 body {
-    background-color: white;
+    background-color: #fdf6e3;
 }
 
 .box {
     color: black;
-    border-right-color: black;
+    border-right-color: #586e75;
 }
 
-.project {
+table.taskboard {
     color: black;
-    background-color: white;
+    background-color: #eee8d5;
+}
+
+.task_box {
+    background-color: #fdf6e3;
 }
 
 .backlog {
@@ -29,18 +33,18 @@ body {
 }
 
 .project_separator {
-    border-top-color: black;
+    border-top-color: #586e75;
 }
 
 .project_actions {
-    border-color: black;
-    background-color: white;
+    border-color: #586e75;
     color: black;
 }
 
 .deliverable,
 .task {
     color: black;
+    border-color: #586e75;
     background-color: #FEFBF1;
 }
 
