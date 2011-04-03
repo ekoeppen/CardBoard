@@ -205,7 +205,7 @@ $(document).ready(function() {
                     open_edit_task_dialog($(this));
                 });
                 
-                task.find(".description").text(description);
+                task.find(".description").html(format(description));
 
                 $.ajax({
                     url: "/CardBoard/board/new_task/" + pid,
@@ -277,11 +277,11 @@ $(document).ready(function() {
                 var description = dialog.find("#new_deliverable_description").val();
                 var deliverable = $("#deliverable_template").clone();
                 
-                deliverable.find(".description").click(function(event) {
+                deliverable.find(".deliverable_description").click(function(event) {
                     open_edit_deliverable_dialog($(this));
                 });
                 
-                deliverable.find(".description").text(description);
+                deliverable.find(".deliverable_description").html(format(description));
 
                 $.ajax({
                     url: "/CardBoard/board/new_deliverable/" + pid,
