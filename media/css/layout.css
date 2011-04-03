@@ -109,18 +109,21 @@ img.delete_project_action {
 
 .deliverable,
 .task {
-    float: left;
     border-width: 1px solid;
     border-style: solid;
     margin: 2px;
     padding: 2px;
     max-width: 20em;
+    min-width: 10em;
     border-radius: 6px;
     -moz-border-radius: 6px;
 }
 
+.task {
+    float: left;
+}
+
 .deliverable {
-    float: none;
     display: inline-block;
 }
 
