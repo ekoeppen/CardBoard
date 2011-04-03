@@ -277,12 +277,12 @@ $(document).ready(function() {
                 var description = dialog.find("#new_deliverable_description").val();
                 var deliverable = $("#deliverable_template").clone();
                 
-                deliverable.find(".deliverable_description").click(function(event) {
-                    open_edit_deliverable_dialog($(this));
-                });
-                
                 deliverable.find(".deliverable_description").html(format(description));
 
+                deliverable.find(".deliverable_description").click(function(event) {
+                    open_edit_deliverable_dialog(deliverable);
+                });
+                
                 $.ajax({
                     url: "/CardBoard/board/new_deliverable/" + pid,
                     type: 'POST',
