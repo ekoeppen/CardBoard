@@ -110,7 +110,7 @@ $(document).ready(function() {
     });
     
     $(".deliverable_description").click(function(event) {
-        open_edit_deliverable_dialog($(this).parent());
+        open_edit_deliverable_dialog($(this).closest(".deliverable"));
     });
 
     $(".project_name").click(function(event) {
