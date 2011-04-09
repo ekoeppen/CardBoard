@@ -139,3 +139,7 @@ span p {
 span ul {
     margin: 0.2em;
 }
+
+div#assignee_selection {
+    text-align: right;
+}

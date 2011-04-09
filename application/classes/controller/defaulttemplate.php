@@ -32,6 +32,7 @@ class Controller_DefaultTemplate extends Controller_Template
 												);
 			$this->template->scripts          = array(
 												'media/scripts/scripts.js',
+												'media/scripts/jjquery.cookie-modified.js'
 												//'media/js/jquery.inlineEdit.js',
 												//'media/js/jquery.jeditable.js',
 												);

@@ -156,6 +156,16 @@ $(document).ready(function() {
     $("img.add_project").click(function(event) {
         open_add_project_dialog($(this));
     });
+    
+    $("#assignee_selection_option").change(function(event){
+        var pid = event.target[event.target.selectedIndex].getAttribute('value');
+        if (pid != -1) {
+            $.cookie('cardboard-filter', pid);
+        } else {
+            $.cookie('cardboard-filter', null);
+        }
+        window.location.reload();
+    });
 
     $("#assign_dialog").dialog({
         title: "Assign",

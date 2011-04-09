@@ -1,6 +1,7 @@
 <?php
 
 $parser = new Helper_Formatter();
+$assignee_filter = isset($_COOKIE['cardboard-filter']) ? $_COOKIE['cardboard-filter'] : "";
 
 echo "<div id='assign_dialog'>Assign to: <select name='assignee_dialog_select' id='assign_dialog_assignee'>";
 foreach ($assignees as $i => $a) {
@@ -69,7 +70,8 @@ foreach ($projects as $p) {
 	for ($state = 0; $state < 4; $state++) {
 		echo "<td class='task_box box' id='project-$p->id-" . $states[$state] . "'>";
 		foreach ($tasks as $t) {
-			if ($t->project_id == $p->id && $t->status == $state) {
+			if ($t->project_id == $p->id && $t->status == $state &&
+				($assignee_filter == $t->assignee_id || !$t->assignee_id || $assignee_filter == "")) {
 				echo "<div id='task-$t->id' class='task " . $states[$state] .
 					"'><span class='description'>" .
 					$parser->transform($t->description) .
@@ -112,4 +114,13 @@ foreach ($projects as $p) {
 }
 
 echo "<tr><td colspan='6' class='project_separator'></td></tr></table>";
+
+echo "<div id='assignee_selection'><select id='assignee_selection_option'>";
+echo "<option value='-1'>All</option>";
+foreach ($assignees as $a) {
+	echo "<option value='$a->id' ";
+	if ($a->id == $assignee_filter) { echo "selected"; }
+	echo ">$a->name</option>";
+}
+echo "</select></div>";
 
