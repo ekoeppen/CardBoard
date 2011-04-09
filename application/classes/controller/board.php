@@ -13,7 +13,7 @@ class Controller_Board extends Controller_DefaultTemplate {
 	{
 	    $this->template->title = 'CardBoard';
 		$param =  array();
-		$params['projects'] = ORM::factory("project")->find_all();
+		$params['projects'] = ORM::factory("project")->order_by("position")->find_all();
 		$params['tasks'] = ORM::factory("task")->find_all();
 		$params['deliverables'] = ORM::factory("deliverable")->find_all();
 		$assignees = ORM::factory("person")->find_all();
@@ -115,6 +115,7 @@ class Controller_Board extends Controller_DefaultTemplate {
 		$project = ORM::factory("project");
 		$project->description = $_POST['description'];
 		$project->name = $_POST['name'];
+		$project->position = Model_Project::max_position() + 1;
 		$project->save();
 		$this->auto_render = FALSE;
 		echo $project->id;
@@ -123,7 +124,32 @@ class Controller_Board extends Controller_DefaultTemplate {
 	public function action_delete_project($id)
 	{
 		$project = ORM::factory("project", $id);
+		DB::query(Database::UPDATE, "UPDATE projects SET position = position - 1 WHERE position > $project->position")->execute();
 		$project->delete();
+		$this->auto_render = FALSE;
+		echo $project->id;
+	}
+
+	public function action_project_up($id)
+	{
+		$project = ORM::factory("project", $id);
+		if ($project->position > 1) {
+			DB::query(Database::UPDATE, "UPDATE projects SET position = position + 1 WHERE position = $project->position - 1")->execute();
+			$project->position--;
+			$project->save();
+		}
+		$this->auto_render = FALSE;
+		echo $project->id;
+	}
+
+	public function action_project_down($id)
+	{
+		$project = ORM::factory("project", $id);
+		if ($project->position < Model_Project::max_position()) {
+			DB::query(Database::UPDATE, "UPDATE projects SET position = position - 1 WHERE position = $project->position + 1")->execute();
+			$project->position++;
+			$project->save();
+		}
 		$this->auto_render = FALSE;
 		echo $project->id;
 	}

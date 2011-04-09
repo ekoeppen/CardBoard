@@ -349,6 +349,18 @@ $(document).ready(function() {
         autoOpen: false,
         width: 400,
         buttons: {
+            "Up": function() {
+                var pid = $(this).data("source").closest(".project_row").attr('id').substr(8);
+                $.get("/CardBoard/board/project_up/" + pid);
+                $(this).dialog("close");
+                window.location.reload();
+            },
+            "Down": function() {
+                var pid = $(this).data("source").closest(".project_row").attr('id').substr(8);
+                $.get("/CardBoard/board/project_down/" + pid);
+                $(this).dialog("close");
+                window.location.reload();
+            },
             "Delete": function() {
                 var dialog = $(this);
                 if (confirm("Delete project?")) {
