@@ -11,6 +11,9 @@ class Helper_Formatter extends MarkdownExtra_Parser {
 	
 	public function transform($text)
 	{
+		$text = preg_replace_callback('/{{include:\s*([^}]*)}}/', 
+			create_function('$matches', 'return Curl::get($matches[1]);'),	$text);
+
 		$html = parent::transform($text);
 		return $html;
 	}
