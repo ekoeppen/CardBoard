@@ -28,14 +28,10 @@ class Controller_DefaultTemplate extends Controller_Template
 												'media/css/colors-light.css' => 'screen',
 												'media/css/layout.css' => 'screen'
 												);
-			if (Controller_Admin::check_credentials()) {
-				$this->template->scripts          = array(
-													'media/scripts/scripts.js',
-													'media/scripts/jjquery.cookie-modified.js'
-													);
-			} else {
-				$this->template->scripts          = array();
-			}
+			$this->template->scripts          = array(
+												'media/scripts/scripts.js',
+												'media/scripts/jjquery.cookie-modified.js'
+												);
 		}
 	}
 
