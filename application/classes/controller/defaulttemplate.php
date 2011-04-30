@@ -24,18 +24,18 @@ class Controller_DefaultTemplate extends Controller_Template
 			$this->template->content          = '';
 			$this->template->footer           = '';
 			$this->template->styles           = array(
-												//'media/css/print.css' => 'print',
 												'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css' => 'screen',
-												//'media/css/fonts.css' => 'screen',
 												'media/css/colors-light.css' => 'screen',
 												'media/css/layout.css' => 'screen'
 												);
-			$this->template->scripts          = array(
-												'media/scripts/scripts.js',
-												'media/scripts/jjquery.cookie-modified.js'
-												//'media/js/jquery.inlineEdit.js',
-												//'media/js/jquery.jeditable.js',
-												);
+			if (Controller_Admin::check_credentials()) {
+				$this->template->scripts          = array(
+													'media/scripts/scripts.js',
+													'media/scripts/jjquery.cookie-modified.js'
+													);
+			} else {
+				$this->template->scripts          = array();
+			}
 		}
 	}
 
