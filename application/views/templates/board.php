@@ -3,6 +3,8 @@
 $parser = new Helper_Formatter();
 $assignee_filter = isset($_COOKIE['cardboard-filter']) ? $_COOKIE['cardboard-filter'] : "";
 
+echo "<div style='display:none'>";
+
 echo "<div id='assign_dialog'>Assign to: <select name='assignee_dialog_select' id='assign_dialog_assignee'>";
 foreach ($assignees as $i => $a) {
 	echo "<option value='$i'>" . $a->name . "</option>";
@@ -52,6 +54,8 @@ echo "<div id='task_template' style='display:none'><span class='description'></s
 	"</div></div>";
 
 echo "<div id='deliverable_template' style='display:none'><span class='deliverable_description'></span></div>";
+
+echo "</div>";
 
 $states = array("backlog", "assigned", "in_progress", "done");
 $deliverables_states = array("green", "yellow", "red");

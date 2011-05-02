@@ -9,7 +9,11 @@
     <meta name="description" content="<?php echo $meta_description;?>" />
     <meta name="copyright" content="<?php echo $meta_copywrite;?>" />
     <?php foreach($styles as $file => $type) { echo HTML::style($file, array('media' => $type)), "\n"; }?>
-	<?php foreach($scripts as $file) { echo HTML::script($file), "\n"; }?>
+	<?php
+		if (Controller_Admin::check_credentials()) {
+			foreach($scripts as $file) { echo HTML::script($file), "\n"; }
+		}
+	?>
   </head>
   <body>
     <div id="container">

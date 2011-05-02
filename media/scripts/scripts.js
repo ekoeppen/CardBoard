@@ -431,4 +431,8 @@ $(document).ready(function() {
             }
         }
     });
+    
+    $("a").bind("click", function(e) {
+       e.stopPropagation();
+    });
 });

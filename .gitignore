@@ -11,3 +11,4 @@ build
 application/logs/*
 application/cache/*
 *.sqlite3
+credentials
