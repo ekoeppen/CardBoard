@@ -3,7 +3,7 @@
 class Controller_Admin extends Controller {
 
 	public static function check_credentials() {
-		return ($_COOKIE['cardboard_login'] == file_get_contents(DOCROOT . "credentials"));
+		return isset($_COOKIE['cardboard_login']) && $_COOKIE['cardboard_login'] == file_get_contents(DOCROOT . "credentials");
 	}
 
 	public function action_login($password)
