@@ -2,6 +2,19 @@
 
 A simple task board
 
+# Installation
+
+* Clone from github into a webserver reachable directory
+* Make the application/cache and application/logs directories web server writable
+* Make the main folder writable for the webserver in case sqlite is used
+* Update Kohana:
+
+    git submodule init
+    git submodule update
+    
+* Create the database, e.g with sqlite using cardboard.sqlite3 as the database name, and make it writable
+* Create a file called credentials which contains the password for people allowed to modify the board
+
 # Schema
 
     CREATE TABLE deliverables (id integer primary key autoincrement not null, project_id integer, description text, status integer(1));
