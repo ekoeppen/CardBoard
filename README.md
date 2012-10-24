@@ -13,7 +13,9 @@ A simple task board
     git submodule update
     
 * Create the database, e.g with sqlite using cardboard.sqlite3 as the database name, and make it writable
+* Create the tables in the database using the schema below
 * Create a file called credentials which contains the password for people allowed to modify the board
+* Add some users into the people table in the database
 
 # Schema
 
