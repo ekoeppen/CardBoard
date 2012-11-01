@@ -61,7 +61,11 @@ $states = array("backlog", "assigned", "in_progress", "done");
 $deliverables_states = array("green", "yellow", "red");
 
 echo "<div class='board_actions'><img class='add_project' src='media/images/add_project.png'/></div>".
-	"<table class='taskboard'>";
+        "<table class='taskboard'>";
+
+echo "<tr><td class='box_project box'>&nbsp</td>" . 
+        "<td class='box_project box'>Backlog</td><td class='box_project box'>Assigned</td><td class='box_project box'>In Progress</td><td class='box_project box'>Done</td>" .
+        "</tr>";
 
 foreach ($projects as $p) {
    	echo "<tr><td colspan='6' class='project_separator'></td></tr>" .
